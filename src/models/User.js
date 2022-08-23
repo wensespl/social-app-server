@@ -8,14 +8,18 @@ const UserSchema = new mongoose.Schema(
     profilePicture: { type: String, default: '' },
     coverPicture: { type: String, default: '' },
     followers: { type: Array, default: [], ref: 'User' },
-    followins: { type: Array, default: [], ref: 'User' },
-    isAdmin: { type: Boolean, default: false }
+    followings: { type: Array, default: [], ref: 'User' },
+    isAdmin: { type: Boolean, default: false },
+    desc: { type: String, max: 50 },
+    city: { type: String, max: 50 },
+    from: { type: String, max: 50 },
+    relationship: { type: Number, enum: [1, 2, 3] }
   },
   { versionKey: false, timestamps: true }
 )
 
 UserSchema.methods.toJSON = function () {
-  const { password, _id, ...user } = this.toObject()
+  const { password, _id, isAdmin, updatedAt, ...user } = this.toObject()
   user.userId = _id
   return user
 }
