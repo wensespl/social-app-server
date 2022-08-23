@@ -14,4 +14,10 @@ const UserSchema = new mongoose.Schema(
   { versionKey: false, timestamps: true }
 )
 
+UserSchema.methods.toJSON = function () {
+  const { password, _id, ...user } = this.toObject()
+  user.userId = _id
+  return user
+}
+
 module.exports = mongoose.model('User', UserSchema)
