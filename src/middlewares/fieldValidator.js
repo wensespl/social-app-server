@@ -15,6 +15,4 @@ const fieldValidator = (req, res, next) => {
   next()
 }
 
-module.exports = {
-  fieldValidator
-}
+module.exports = fieldValidator
